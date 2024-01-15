@@ -1,6 +1,18 @@
 import os
+add = {}
+restaurantes = [
+    {
+        'nome': 'SushiTemaki',
+        'categoria': 'Comida',
+        'status': True
+    },
+    {
+        'nome': 'BurguerDev',
+        'categoria': 'Comida',
+        'status': False
+    }
+]
 
-restaurantes = ['Pizza Boa', 'SushiJapa']
 
 def exibir_nome():
     print("""
@@ -58,17 +70,22 @@ def opcao_invalida():
 
 def adicionar_restaurante():
     print('Digite o nome do restaurante que deseja cadastrar')
-    adicionar = input(f'Digite o nome: ')
-    restaurantes.append(adicionar)
-    print(f'O restaurante adicionado foi', adicionar)
+    restaurante = input(f'Digite o nome: '),
+    categoria = input(f'Digite a categoria: '),
+    add = {
+        'nome': restaurante,
+        'categoria': categoria
+    }
+    restaurantes.append(add)
+    print(f'O restaurante adicionado foi', adicionar_restaurante)
     main()
 
 
 def listar_restaurante():
     print('Lista de restaurantes')
     for restaurante in restaurantes:
-        print(f'O restaurantes cadastrados: {restaurante}')
-    # main()
+        print(f'Restaurante : ', restaurante['nome'], '|', restaurante['categoria'], '|', restaurante['status']),
+    main()
 
 
 def main():
