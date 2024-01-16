@@ -28,13 +28,16 @@ class Restaurant:
         self._status = not self._status
 
     def evaluation(self, full_name, nota):
-        evaluation = Evaluation(full_name, nota)
-        self._evaluation.append(evaluation)
+        if 0 < nota <= 5:
+            evaluation = Evaluation(full_name, nota)
+            return self._evaluation.append(evaluation)
+        print('A nota fornecida não é válida, deve estar entre 0 e 5')
+        exit()
 
     @property
     def media_evaluation(self):
         if not self._evaluation:
-            return 0
+            return 'Sem Avaliação'
 
         sum_notes = sum(Evaluation._nota for Evaluation in self._evaluation)
         quantity_notes = len(self._evaluation)
