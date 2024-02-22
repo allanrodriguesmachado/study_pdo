@@ -2,9 +2,9 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use App\Database\Connection;
+use App\Models\User;
 
-$pdo1 = Connection::getInstance();
-$client = $pdo1->query('SELECT * FROM users LIMIT 1');
+$model = new User();
+$user = $model->all(1);
 
-var_dump($client->fetch());
+var_dump($user);
