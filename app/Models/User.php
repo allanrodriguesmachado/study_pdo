@@ -58,6 +58,19 @@ class User extends Model
 
         if (!empty($this->id)) {
             $userID = $this->id;
+            $email = $this->read("SELECT id FROM users WHERE email = :email AND id != :id",
+                "email={$this->email}&id={$userID}");
+
+//            if ($email->rowCount()) {
+//                return $this->message = "O e-mail informado já esta cadastrado";
+//            }
+
+            $this->update(self::$entity, $this->safe(), "id= :id", "id={$userID}");
+            if ($this->fail()) {
+                return $this->message = "Erro ao atualizar verifique os dados";
+            }
+
+            return $this->message = "Cadastro atualizado com sucesso";
         }
 
         if (empty($this->id)) {
@@ -65,20 +78,32 @@ class User extends Model
                 return $this->message = "O e-mail informado já esta cadastrado";
             }
 
-            $userID = $this->create(self::$entity, $this->safe());
+            $userid = $this->create(self::$entity, $this->safe());
 
             if ($this->fail()) {
                 return $this->message = "Erro ao cadastrar verifique os dados";
             }
 
-            return $this->message = "Cadastro realizado com sucesso";
+            $this->message = "Cadastro realizado com sucesso";
         }
-        return $this->data = $this->read("SELECT * FROM users WHERE id = :id", "id={$userID}")->fetch();
+        $this->data = $this->read("SELECT * FROM users WHERE id = :id", "id={$userid}")->fetch();
+        return $this;
     }
 
     public function destroy()
     {
+        if (!empty($this->id)) {
+            $this->delete(self::$entity, "id = :id", "id={$this->id}");
+        }
 
+        if ($this->fail()) {
+            $this->message = "Não foi possível remover o usuário";
+            return null;
+        }
+
+        $this->message = "Usuário removido com sucesso";
+        $this->data = null;
+        return $this;
     }
 
     private function required()

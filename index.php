@@ -7,14 +7,7 @@ use App\Models\User;
 
 $model = new User();
 
-$user = $model->boostrap(
-    'Allan',
-    'Rodrigues',
-    'allan@teste.com',
-    '123.434.323-23'
-);
-$user->email = null;
+$user = $model->load(2);
+$user->destroy();
 
-
-
-var_dump($user->save());
+var_dump($user);

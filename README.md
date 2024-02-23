@@ -2,7 +2,7 @@ Sure! Below is an example of how you can write a README.md file for a PDO PHP st
 
 ---
 
-# Study PDO PHP
+# Active Records
 
 This is a project aimed at studying PHP Data Objects (PDO), an extension of PHP that provides a uniform interface for accessing relational databases.
 
