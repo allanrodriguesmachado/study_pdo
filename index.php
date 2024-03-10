@@ -2,12 +2,10 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-use App\Models\User;
+var_dump(
+    get_defined_constants(true)['user']
+);
 
+$connection = \App\Core\Connection::getInstance();
 
-$model = new User();
-
-$user = $model->load(2);
-$user->destroy();
-
-var_dump($user);
+var_dump($connection);

@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Models;
+namespace App\Core;
 
-use App\Database\Connection;
 use PDO;
 use PDOException;
 use stdClass;
@@ -47,7 +46,7 @@ abstract class Model
         return $this->message;
     }
 
-    protected function create(string $entity, array $data)
+    protected function create(string $entity, array $data): false|string|null
     {
         try {
             $columns = implode(", ", array_keys($data));
@@ -84,7 +83,7 @@ abstract class Model
         }
     }
 
-    protected function update(string $entity, array $data, string $terms, string $params)
+    protected function update(string $entity, array $data, string $terms, string $params): ?int
     {
         try {
             $dataSet = [];
@@ -102,7 +101,7 @@ abstract class Model
         }
     }
 
-    protected function delete(string $entity, string $terms, string $params)
+    protected function delete(string $entity, string $terms, string $params): ?int
     {
         try {
             $stmt = Connection::getInstance()->prepare("DELETE FROM {$entity} WHERE {$terms}");

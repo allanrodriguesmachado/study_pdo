@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Core\Model;
+
 class User extends Model
 {
     protected static array $safe = ["id", "created_at", "updated_at"];
@@ -61,9 +63,9 @@ class User extends Model
             $email = $this->read("SELECT id FROM users WHERE email = :email AND id != :id",
                 "email={$this->email}&id={$userID}");
 
-//            if ($email->rowCount()) {
-//                return $this->message = "O e-mail informado já esta cadastrado";
-//            }
+            if ($email->rowCount()) {
+                return $this->message = "O e-mail informado já esta cadastrado";
+            }
 
             $this->update(self::$entity, $this->safe(), "id= :id", "id={$userID}");
             if ($this->fail()) {

@@ -1,18 +1,13 @@
 <?php
 
-namespace App\Database;
+namespace App\Core;
 
 use PDO;
 use PDOException;
 
 class  Connection
 {
-    private const  HOST = "localhost";
-    private const  USER = "postgres";
-    private const  DBNAME = "client";
-    private const  PASSWD = "830314";
-
-    private const  OPTIONS = [
+    private const OPTIONS = [
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_CASE => PDO::CASE_NATURAL
@@ -24,9 +19,9 @@ class  Connection
         if (empty(self::$instance)) {
             try {
                 return self::$instance = new PDO(
-                    "pgsql:host=" . self::HOST . ";dbname=" . self::DBNAME,
-                    self::USER,
-                    self::PASSWD,
+                    "pgsql:host=" . CONF_DB_HOST . ";dbname=" . CONF_DB_NAME,
+                    CONF_DB_USER,
+                    CONF_DB_PASS,
                     self::OPTIONS
                 );
             } catch (PDOException $pdo_exception) {
