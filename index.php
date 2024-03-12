@@ -2,10 +2,13 @@
 
 require_once __DIR__ . '/vendor/autoload.php';
 
+$session = new \App\Core\Session();
+$session->set("user", 1);
+$session->regenerate();
+$session->regenerate();
+
 var_dump(
-    get_defined_constants(true)['user']
+    $_SESSION,
+    $session->all(),
+    session_id()
 );
-
-$connection = \App\Core\Connection::getInstance();
-
-var_dump($connection);

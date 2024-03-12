@@ -21,3 +21,5 @@ define("CONF_URL_ERROR", CONF_URL_BASE . "/404");
  */
 define("CONF_DATE_BR", "d/m/Y H:i:s");
 define("CONF_DATE_APP", "y-m-d H:i:s");
+
+define("CONF_SES_PATH", __DIR__ . '/../../storage/sessions/');
